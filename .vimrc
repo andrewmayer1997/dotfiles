@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
@@ -6,10 +7,13 @@ Plug 'preservim/nerdtree'
 Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 
+
+let g:gruvbox_contrast_dark = 'hard'
 set background=dark
 au VimEnter * highlight clear SignColumn
 colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'hard'
+
+set nocompatible
 set signcolumn=yes
 set shortmess+=c
 set updatetime=200
@@ -28,6 +32,20 @@ set noshiftround
 set backspace=indent,eol,start
 set encoding=utf-8
 
+" undercurl
+"let &t_Cs = "\uFE4F"
+"let &t_Ce = "."
+
+
+au VimEnter * highlight CocErrorHighlight ctermbg=none cterm=underline
+au VimEnter * highlight CocWarningHighlight ctermbg=none cterm=underline
+au VimEnter * highlight CocInfoHighlight ctermbg=none cterm=underline
+
+au VimEnter * highlight CocErrorSign ctermbg=none ctermfg=red
+au VimEnter * highlight CocWarningSign ctermbg=none ctermfg=yellow
+au VimEnter * highlight CocInfoSign ctermbg=none ctermfg=blue
+
+
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '->'
 let g:ale_info = '--'
@@ -37,9 +55,9 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
+let g:ale_c_clangformat_executable = 'clang-format'
 
-
-nnoremap <c-f> :!bash vim_cpp_fixer.sh % <CR>
+nnoremap <c-f> :%CocFix <CR>
 
 let b:ale_fixers = {
  \ 'dart':['dartfmt'],
@@ -57,7 +75,7 @@ let g:ale_linters = {
  \ 'dart':['dartanalyzer'],
  \ 'typescript':['eslint'],
  \ 'javascript': ['eslint'],
- \ 'python': ['pylint'] 
+ \ 'python': ['pylint']
  \}
 
 inoremap <silent><expr> <TAB>
@@ -75,4 +93,3 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-

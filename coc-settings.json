@@ -1,0 +1,22 @@
+  {
+      "languageserver": {
+          "clangd": {
+          "command": "clangd",
+          "args": ["--background-index"],
+          "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+          "filetypes": ["c", "cpp", "objc", "objcpp"]
+        }
+      },
+      "diagnostic.enable": true,
+      "diagnostic.refreshOnInsertMode": false,
+      "diagnostic.level": "information",
+      "diagnostic.enableMessage": "always",
+      "diagnostic.refreshAfterSave": true,
+      "diagnostic.displayByAle": false,
+      "typescript.format.enabled": false,
+      "diagnostic.errorSign": "\u25CF",
+      "diagnostic.warningSign": "\u25CF",
+      "diagnostic.hintSign": "\u25CF",
+      "diagnostic.infoSign": "\u25CF",
+      "suggest.floatEnable": true
+  }
